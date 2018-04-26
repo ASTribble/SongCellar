@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+ 
 }
 
 *, *:before, *:after {
@@ -7,9 +8,17 @@ html {
   
 }
 
-body {
-  background-repeat: no-repeat;
-  background-image: url('./beerMug-small.jpeg');
+body{
+  display: flex;
+  flex-direction: column;
+  background-image: url('./barrel.jpg');
+  background-repeat: repeat-y;
+}
+
+main{
+  /* background-repeat: no-repeat; */
+  background-color: rgba(33, 33, 33, .6);
+  /* background-image: url('./beerMug-small.jpeg'); */
   /* background-size: cover; */
   color: #FFFFFF;
   text-shadow: -1px 0 #212121,0 1px #212121,1px 0 #212121,0 -1px #212121;
@@ -18,16 +27,31 @@ body {
   margin-left: auto;
   margin-right: auto;
   /* min-height: 100%; */
+  padding: 3em 0 6em;
+  width: 80%;
+  max-width: 1200px;
+  border-radius: 8px;
+  /* display: flex; */
 }
 
 h1 {
-  font-size: 5em;
-  margin-bottom: .5em;
+  font-size: 112px;
+  margin: 0 auto .5em;
+  width: 100%;
+}
+
+h1 span{
+  font-size: 56px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0 auto 1em;
 }
 
 h2 {
   font-size: 2.5em;
   margin-top: 0;
+  width: 100%;
 }
 
 h3 {
@@ -40,10 +64,14 @@ p {
 
 header {
   color: #FFFFFF;
-  margin: 2em auto;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 80%;
   text-align: center;
   text-shadow: -2px 0 #757575, 0 1px #757575, 1px 0 #757575, 0 -1px #757575;
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
@@ -70,6 +98,7 @@ a {
 
 .home-buttons {
   text-align: center;
+  margin: 2em auto 1em;
 }
 
 .home-page-button, .edit-buttons, .submit-buttons {
@@ -87,6 +116,8 @@ a {
 
 .home-page-button {
   margin-bottom: 1em;
+  width: 250px;
+  max-width: 100%;
 }
 
 .edit-buttons {
@@ -130,7 +161,8 @@ label:hover, label:focus {
 .read-lyrics {
   margin: 1em 0 auto;
   padding: 1em;
-  font-size: 1.3em;
+  font-size: 1.35em;
+  line-height: 1.5;
   white-space: pre-wrap;
   text-align: left;
   background-color: #757575;
@@ -221,26 +253,65 @@ span {
   padding-left: 1em
 }
 
-main {
-  text-align: center;
-}
+
+
 
 @media (max-width: 600px){
+
+  body {
+    background-repeat: repeat-y;
+  }
+
+  #read {
+    width: 100%;
+  }
+
   .read-lyrics {
     width: 100%;
+    font-size: 1.35em;
+    line-height: 1.5;
+    background-color: transparent;      
   }
 
   .home-page-button{
     /* display: block; */
     /* padding: .6em .6em .6em 1.2em; */
-    width: 300px;
+    /* width: 300px; */
     background-color: rgba(255, 193, 7, 0.7);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
   }
 
-  .search-button{
-    display: block;
-    padding: .6em .6em .6em 1.2em;
+  /* .search-button{
     background-color: rgba(255, 193, 7, 0.7);
+  } */
+
+  main{
+    width: 90%;
   }
+}
+
+@media (max-width: 550px){
+
+  main {
+    width: 100%;
+  }
+
+  h1{
+    font-size: 5.6em;
+    display: block;
+  }
+
+  h1 span{
+    font-size: 32px;
+    font-weight: normal;
+  } 
+
+  h2{
+    font-size: 2em;
+    font-weight: normal;
+  }
+
 
 }

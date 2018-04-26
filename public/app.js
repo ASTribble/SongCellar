@@ -9,7 +9,7 @@ const STORE = new Store();
 function generateHomePageHTML(){
   return `
   <header>   
-    <h1>Welcome to Song Cellar!</h1>
+    <h1><span>Welcome to the</span> Song Cellar!</h1>
     <h2>Refresh your memory while filling your glass!</h2>
   </header>
 
