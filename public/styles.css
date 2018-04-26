@@ -10,7 +10,7 @@ html {
 body {
   background-repeat: no-repeat;
   background-image: url('./beerMug-small.jpeg');
-  background-size: cover;
+  /* background-size: cover; */
   color: #FFFFFF;
   text-shadow: -1px 0 #212121,0 1px #212121,1px 0 #212121,0 -1px #212121;
   text-align: center;
