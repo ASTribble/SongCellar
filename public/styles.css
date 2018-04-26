@@ -216,4 +216,9 @@ main {
   text-align: center;
 }
 
-/* @media */
+@media (max-width: 520px){
+  .read-lyrics {
+    width: 100%;
+  }
+
+}
