@@ -71,7 +71,7 @@ a {
   display: inline-block;
   padding-left: 1.2em;
   margin: 0 1.7em 10em;
-  background-color:rgba(255, 193, 7, .1);
+  background-color:rgba(255, 193, 7, .7);
   text-align: center;
   text-shadow: -1px 0 #212121,0 1px #212121,1px 0 #212121,0 -1px #212121;
   box-shadow:-2px 0 #757575, 0 1px #757575, 1px 0 #757575, 0 -1px #757575;
@@ -115,7 +115,7 @@ button{
 }
 
 label:hover, label:focus {
-  background-color: rgb(255, 193, 7);
+  background-color: rgba(117, 117, 117, .7);
 }
 
 .read-lyrics {
@@ -216,9 +216,15 @@ main {
   text-align: center;
 }
 
-@media (max-width: 520px){
+@media (max-width: 600px){
   .read-lyrics {
     width: 100%;
+  }
+
+  .home-page-button{
+    display: block;
+    padding: .6em .6em .6em 1.2em;
+    background-color: rgba(255, 193, 7, 0.7);
   }
 
 }
