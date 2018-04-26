@@ -70,7 +70,7 @@ describe('Songs endpoints tests', function() {
           return Song.count();
         })
         .then(count => {
-          res.body.should.have.length.of(count);
+          res.body.should.have.lengthOf(count);
         });
     });
   
