@@ -38,16 +38,18 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 
   // I want to check if all user.songs is in our songs db
-  for (let i = 0; i < req.body.songs.length; i++) {
-    const id = req.body.songs[i]._id;
-    console.log('req.body.songs[i]._id:', id);
-    Song
-      .findById(id)
-      .then(() => {})
-      .catch(err => {
-        res.status(400).send('song not in db');
-      });
-  }
+  if(req.body.songs){
+    for (let i = 0; i < req.body.songs.length; i++) {
+      const id = req.body.songs[i]._id;
+      console.log('req.body.songs[i]._id:', id);
+      Song
+        .findById(id)
+        .then(() => {})
+        .catch(err => {
+          res.status(400).send('song not in db');
+        });
+    }
+  }  
 
   const requiredFields = ['username'];
   for (let i = 0; i < requiredFields.length; i++) {
