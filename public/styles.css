@@ -253,7 +253,15 @@ span {
   padding-left: 1em
 }
 
+@media (max-width: 850px){
+  main{
+    width: 90%;
+  }
 
+  .read-lyrics {
+    width: 90%;
+  }
+}
 
 
 @media (max-width: 600px){
@@ -281,6 +289,12 @@ span {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
+  }
+
+  .home-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* .search-button{
