@@ -9,7 +9,7 @@ html {
 
 body {
   background-repeat: no-repeat;
-  background-image: url('./beerMug.jpeg');
+  background-image: url('./beerMug-small.jpeg');
   background-size: cover;
   color: #FFFFFF;
   text-shadow: -1px 0 #212121,0 1px #212121,1px 0 #212121,0 -1px #212121;
@@ -61,6 +61,7 @@ a {
   color: #FFFFFF;
   margin-right:.5em;
 }
+
 
 .home-buttons {
   text-align: center;
@@ -190,8 +191,6 @@ ul {
   list-style:none;
   text-align: center;
   font-size: 1.3em;
-  /*   margin-left:auto;
-  margin-right:auto; */
 }
 
 li {
@@ -216,3 +215,5 @@ span {
 main {
   text-align: center;
 }
+
+/* @media */
