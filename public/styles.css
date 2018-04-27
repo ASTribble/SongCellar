@@ -102,7 +102,7 @@ a {
   margin: 2em auto 1em;
 }
 
-.home-page-button, .edit-buttons, .submit-buttons {
+.home-page-button, .edit-buttons, .submit-buttons, .search-button {
   display: inline-block;
   /* width: 250px; */
   padding: 4px;
@@ -127,7 +127,7 @@ a {
   width: 250px;
 }
 
-.submit-buttons {
+.submit-buttons, .search-button{
   margin: 1em;
 }
 
@@ -135,7 +135,7 @@ button{
    opacity: 0;
 }
 
-.search-button {
+/* .search-button {
   width: 250px;
   display: inline-block;
   padding:4px 1.2em;
@@ -145,13 +145,13 @@ button{
   text-shadow: -1px 0 #212121,0 1px #212121,1px 0 #212121,0 -1px #212121;
   box-shadow:-2px 0 #757575, 0 1px #757575, 1px 0 #757575, 0 -1px #757575;
   border-radius: 3px;
-}
+} */
 
-.search-lable {
+/* .search-lable {
   font-size: 1.1em;
   text-align: center;
   text-shadow: -1px 0 #212121,0 1px #212121,1px 0 #212121,0 -1px #212121;
-}
+} */
 
 label:hover, label:focus {
   background-color: rgba(117, 117, 117, .7);
@@ -262,6 +262,13 @@ fieldset {
   border-radius: 10px
 }
 
+
+.user-search-div, 
+.search-p,  
+.title-search-div {
+  text-align: center;
+}
+
 ul {
   display: inline-block;
   margin: 0;
@@ -289,11 +296,19 @@ span {
   padding-left: 1em
 }
 
+
+
+
+/* ====== MEDIA 1000 PX ======================== */
+
 @media (max-width: 1000px) {
   fieldset {
     padding: 3em 3em 4em;
   }
 }
+
+
+/* ===== MEDIA 850 PX =========================== */
 
 @media (max-width: 850px){
   main{
@@ -303,11 +318,10 @@ span {
   .read-lyrics {
     width: 90%;
   }
-
-
 }
 
 
+/* ===== MEDIA 600 PX =========================== */
 @media (max-width: 600px){
 
   body {
@@ -349,6 +363,11 @@ span {
     width: 90%;
   }
 }
+
+
+
+
+/* ===== MEDIA 500 PX ========================= */
 
 @media (max-width: 550px){
 

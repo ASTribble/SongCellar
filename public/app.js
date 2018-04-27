@@ -93,22 +93,42 @@ function generateSearchPageHTML(){
         <h2 for='search-form'>
           Search the Cellar!
         </h2>
+
+        <fieldset class='search-fieldset'>
+          <div class='title-search-div'
+            <lable for='title-input' class='search-lable'>Search by Title</lable>
+            <input 
+              type='text' 
+              class='title-input, js-title-input, add-input' 
+              name='title-input' 
+              id='title-input' 
+              form='search-form' 
+              placeholder='title to search'>
+          </div>
       
-        <lable for='title-input' class='search-lable'>Search by Title</lable>
-        <input type='text' class='title-input, js-title-input, add-input' name= 'title-input' id='title-input' form='search-form' placeholder='title to search'>
-        </br>
-          <p>OR</p>
-        </br>
-        <lable for='title-search' class='search-lable'>Search By User</lable>
-        <select name='user-search' class='user-search js-user-search user-input' id='user-search' form='search-form'>
-            <option></option>
-            ${generateUserOptionsHTML()}
-        </select>
-        </br>
-        <label for='search-submit' class='search-button'>Search Now!</label>
-        <button class='search-button, js-search-button' id='search-submit'>
-        </button>
-        </label>
+
+          <p class='search-p'>OR</p>
+
+      
+          <div class='user-search-div'>
+            <lable for='user-search' class='search-lable'>Search By User</lable>
+            <select 
+              name='user-search' 
+              class='user-search js-user-search user-input add-input'
+              id='user-search' 
+              form='search-form'>
+
+                <option></option>
+                ${generateUserOptionsHTML()}
+            </select>
+          </div>
+          </br>
+
+          <label for='search-submit' class='search-button'>Search Now!</label>
+            <button class='search-button, js-search-button' id='search-submit'>
+            </button>
+          </label>
+        </fieldset>
       </form>
     `;
 }
