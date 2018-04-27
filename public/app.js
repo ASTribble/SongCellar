@@ -9,7 +9,7 @@ const STORE = new Store();
 function generateHomePageHTML(){
   return `
   <header>   
-    <h1>Welcome to Song Cellar!</h1>
+    <h1><span>Welcome to the</span> Song Cellar!</h1>
     <h2>Refresh your memory while filling your glass!</h2>
   </header>
 
@@ -31,32 +31,35 @@ function generateHomePageHTML(){
 function generateAddPageHTML() {
   return `
   <h2> Store a Song in the Cellar! </h2>
+
   <form id="add-form" class="view">
     <fieldset>
+
       <label for='user-choose'>User</label>
       <select name='user-choose' class='user-choose, js-user-choose, add-input user-input' id='user-choose' form='add-form' required>
-      <option></option>
-      ${generateUserOptionsHTML()}
-      </select>
-      <div>
-        <label for="title">Title</label>
-        <input class='add-input title-input' type="text" name="title" required>
+        <option></option>
+        ${generateUserOptionsHTML()}
+    </select>
+      <div class='title-artist-div'>
+        <div class='title-div'>
+          <label for="title">Title</label>
+          <input class='add-input title-input' type="text" name="title" required>
+        </div>
+        <div class='artist-div'>
+          <label for="artist">Artist</label>
+          <input class='add-input artist-input' type="text" name="artist">
+        </div>
       </div>
-      <div>
-        <label for="artist">Artist</label>
-        <input class='add-input artist-input' type="text" name="artist">
-      </div> 
-      <div>
-        <label for="lyrics">Lyrics</label>
-        <textarea class='add-input lyrics-input' type="text" rows="10" cols="50" name="lyrics" required></textarea>
-      </div>
-      <div>
-        <label for="notes">Notes</label>
-        <input class='add-input notes-input' type="text" name="notes">
-      </div>
+      <label for="lyrics">Lyrics</label>
+      <textarea class='add-input lyrics-input' type="text" rows="10" cols="50" name="lyrics" required></textarea>
+  
+      <label for="notes">Notes</label>
+      <input class='add-input notes-input' type="text" name="notes">
+  
       <label for="submit-add" class="submit-buttons">Add Song
       <button id="submit-add"></button>
       </label>
+
     </fieldset>
   </form>
   `;
@@ -67,7 +70,7 @@ function generateReadPageHTML() {
   console.log('store.currentSong:', STORE.currentSong);
   return `
   <div id="read" class="view">
-    <h3>Title: ${song.title}</h3>
+    <h3>${song.title}</h3>
     <p>Artist: ${song.artist}</p>
     <p class='read-lyrics'>
       ${song.lyrics}
@@ -90,22 +93,42 @@ function generateSearchPageHTML(){
         <h2 for='search-form'>
           Search the Cellar!
         </h2>
+
+        <fieldset class='search-fieldset'>
+          <div class='title-search-div'
+            <lable for='title-input' class='search-lable'>Search by Title</lable>
+            <input 
+              type='text' 
+              class='title-input, js-title-input, add-input' 
+              name='title-input' 
+              id='title-input' 
+              form='search-form' 
+              placeholder='title to search'>
+          </div>
       
-        <lable for='title-input' class='search-lable'>Search by Title</lable>
-        <input type='text' class='title-input, js-title-input, add-input' name= 'title-input' id='title-input' form='search-form' placeholder='title to search'>
-        </br>
-          <p>OR</p>
-        </br>
-        <lable for='title-search' class='search-lable'>Search By User</lable>
-        <select name='user-search' class='user-search js-user-search user-input' id='user-search' form='search-form'>
-            <option></option>
-            ${generateUserOptionsHTML()}
-        </select>
-        </br>
-        <label for='search-submit' class='search-button'>Search Now!</label>
-        <button class='search-button, js-search-button' id='search-submit'>
-        </button>
-        </label>
+
+          <p class='search-p'>OR</p>
+
+      
+          <div class='user-search-div'>
+            <lable for='user-search' class='search-lable'>Search By User</lable>
+            <select 
+              name='user-search' 
+              class='user-search js-user-search user-input add-input'
+              id='user-search' 
+              form='search-form'>
+
+                <option></option>
+                ${generateUserOptionsHTML()}
+            </select>
+          </div>
+          </br>
+
+          <label for='search-submit' class='search-button'>Search Now!</label>
+            <button class='js-search-button' id='search-submit'>
+            </button>
+          </label>
+        </fieldset>
       </form>
     `;
 }
@@ -115,7 +138,7 @@ function generateSearchResultsHTML() {
 
   return `
     <header>
-      <h2>Select a Vintage!</h2>
+      <h2 class='stock'>Select a Vintage!</h2>
     </header>
 
     <section class='show-results, js-show-results'>
@@ -128,7 +151,7 @@ function generateSearchResultsHTML() {
 
 function generateListPageHTML() {
   return `
-    <h2>Cellar's Complete Inventory!</h2>
+    <h2 class='stock'>The Cellar's Complete Inventory!</h2>
     <ul class='songs-list'>
       ${renderList().join('')}
     </ul>
@@ -140,25 +163,52 @@ function generateEditPageHTML() {
   <form id="edit-form" class="view">
     <fieldset>
       <label for='user-choose-edit'>User</label>
-      <select name='user-choose' class='user-choose, js-user-choose user-input' id='user-choose-edit' form='add-form' required>
-      <option></option>
-      ${generateUserOptionsHTML()}
+      <select 
+        name='user-choose' 
+        class='user-choose, js-user-choose user-input add-input' 
+        id='user-choose-edit' 
+        form='add-form' 
+        required
+      >
+        <option></option>
+        ${generateUserOptionsHTML()}
       </select>
       <div>
         <label for="title">Title</label>
-        <input class='title-input add-input' type="text" name="title" required>
+        <input 
+          class='title-input add-input' 
+          type="text" 
+          name="title" 
+          required
+        >
       </div>
       <div>
         <label for="artist">Artist</label>
-        <input class='artist-input add-input' type="text" name="artist">
+          <input 
+          class='artist-input add-input' 
+          type="text" 
+          name="artist"
+        >
       </div> 
       <div>
         <label for="lyrics">Lyrics</label>
-        <textarea class='lyrics-input' type="text" rows="10" cols="50" name="lyrics" required></textarea>
+        <textarea 
+          class='lyrics-input add-input' 
+          type="text" 
+          rows="10" 
+          cols="50" 
+          name="lyrics" 
+          required
+        >
+        </textarea>
       </div>
       <div>
         <label for="notes">Notes</label>
-        <input class='notes-input add-input' type="text" name="notes">
+        <input 
+          class='notes-input add-input' 
+          type="text" 
+          name="notes"
+        >
       </div>
       <label for="submit-edit" class="submit-buttons">Edit Song
       <button id="submit-edit"></button>
@@ -194,7 +244,7 @@ function renderSearchPage(){
   console.log('renderSearchPage ran');
   $('main').html(generateSearchPageHTML());
   if(STORE.message){
-    $('main').append(`<h2>${STORE.message}</h2>`);
+    $('main').append(`<h4>${STORE.message}</h4>`);
   }
 }
 
@@ -207,8 +257,11 @@ function renderList() {
   return STORE.list.map(song => {
     console.log('song in render list:', song);
     return `
-    <li id="${song.id}">
-      <a href="#" class="song">${song.title}</a> <span>By:${song.artist}</span>
+    <li id="${song.id}" class='song-li'>
+      <a href="#" class="song">
+        <h4 class='song-title'>${song.title}</h4>
+      </a> 
+      <p class='song-artist'>Artist: ${song.artist}</p>
     </li>
     `;
   });
@@ -307,12 +360,14 @@ function searchForSongs(){
 }
 
 function makeSearchResultsList(){
-  //change this back to STORE.songsFromSearch when I figure out that part//
+ 
   const resultList = STORE.songsFromSearch.map(song => {
-    console.log('song in resultsListis:', song);
     return `
-    <li id="${song.id}">
-      <a href="#" class="song">${song.title}</a><span>Written By:${song.artist}</span>
+    <li id="${song.id}" class='song-li'>
+      <a href="#" class="song">
+        <h4 class='song-title'>${song.title}</h4>
+      </a> 
+      <p class='song-artist'>Artist: ${song.artist}</p>
     </li>
     `;
   });
