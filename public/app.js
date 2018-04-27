@@ -31,32 +31,35 @@ function generateHomePageHTML(){
 function generateAddPageHTML() {
   return `
   <h2> Store a Song in the Cellar! </h2>
+
   <form id="add-form" class="view">
     <fieldset>
+
       <label for='user-choose'>User</label>
       <select name='user-choose' class='user-choose, js-user-choose, add-input user-input' id='user-choose' form='add-form' required>
-      <option></option>
-      ${generateUserOptionsHTML()}
-      </select>
-      <div>
-        <label for="title">Title</label>
-        <input class='add-input title-input' type="text" name="title" required>
+        <option></option>
+        ${generateUserOptionsHTML()}
+    </select>
+      <div class='title-artist-div'>
+        <div class='title-div'>
+          <label for="title">Title</label>
+          <input class='add-input title-input' type="text" name="title" required>
+        </div>
+        <div class='artist-div'>
+          <label for="artist">Artist</label>
+          <input class='add-input artist-input' type="text" name="artist">
+        </div>
       </div>
-      <div>
-        <label for="artist">Artist</label>
-        <input class='add-input artist-input' type="text" name="artist">
-      </div> 
-      <div>
-        <label for="lyrics">Lyrics</label>
-        <textarea class='add-input lyrics-input' type="text" rows="10" cols="50" name="lyrics" required></textarea>
-      </div>
-      <div>
-        <label for="notes">Notes</label>
-        <input class='add-input notes-input' type="text" name="notes">
-      </div>
+      <label for="lyrics">Lyrics</label>
+      <textarea class='add-input lyrics-input' type="text" rows="10" cols="50" name="lyrics" required></textarea>
+  
+      <label for="notes">Notes</label>
+      <input class='add-input notes-input' type="text" name="notes">
+  
       <label for="submit-add" class="submit-buttons">Add Song
       <button id="submit-add"></button>
       </label>
+
     </fieldset>
   </form>
   `;
