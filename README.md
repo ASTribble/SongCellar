@@ -19,7 +19,7 @@ Want to review a song before a night out?
 
 ## Song Cellar is an easy place to store and locate song lyrics for pub sings.
 
-![Song Cellar Store-a-Song Page](./cellar-shots/add-song.png)
+![Song Cellar Store-a-Song Page](./cellar-shots/store-song.png)
 
 ![Song Cellar Search Page](./cellar-shots/song-search-mobile.png)
 
@@ -38,6 +38,9 @@ For data persistence, we used MongoDB along with Mongoose.
 mLab is hosting our database on the web while Heroku hosts the Song Cellar itself. We used TravisCI for continuous integration and testing. 
 
 You can visit the Song Cellar at:
+https://song-cellar.herokuapp.com/
+
+
 
 https://david-scott-node-capstone.herokuapp.com/
 
