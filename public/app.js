@@ -163,25 +163,52 @@ function generateEditPageHTML() {
   <form id="edit-form" class="view">
     <fieldset>
       <label for='user-choose-edit'>User</label>
-      <select name='user-choose' class='user-choose, js-user-choose user-input' id='user-choose-edit' form='add-form' required>
-      <option></option>
-      ${generateUserOptionsHTML()}
+      <select 
+        name='user-choose' 
+        class='user-choose, js-user-choose user-input add-input' 
+        id='user-choose-edit' 
+        form='add-form' 
+        required
+      >
+        <option></option>
+        ${generateUserOptionsHTML()}
       </select>
       <div>
         <label for="title">Title</label>
-        <input class='title-input add-input' type="text" name="title" required>
+        <input 
+          class='title-input add-input' 
+          type="text" 
+          name="title" 
+          required
+        >
       </div>
       <div>
         <label for="artist">Artist</label>
-        <input class='artist-input add-input' type="text" name="artist">
+          <input 
+          class='artist-input add-input' 
+          type="text" 
+          name="artist"
+        >
       </div> 
       <div>
         <label for="lyrics">Lyrics</label>
-        <textarea class='lyrics-input' type="text" rows="10" cols="50" name="lyrics" required></textarea>
+        <textarea 
+          class='lyrics-input add-input' 
+          type="text" 
+          rows="10" 
+          cols="50" 
+          name="lyrics" 
+          required
+        >
+        </textarea>
       </div>
       <div>
         <label for="notes">Notes</label>
-        <input class='notes-input add-input' type="text" name="notes">
+        <input 
+          class='notes-input add-input' 
+          type="text" 
+          name="notes"
+        >
       </div>
       <label for="submit-edit" class="submit-buttons">Edit Song
       <button id="submit-edit"></button>
