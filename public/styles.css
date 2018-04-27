@@ -35,13 +35,13 @@ main{
 }
 
 h1 {
-  font-size: 112px;
+  font-size: 6em;
   margin: 0 auto .5em;
   width: 100%;
 }
 
 h1 span{
-  font-size: 56px;
+  font-size: .5em;
   display: flex;
   justify-content: center;
   padding: 0;
@@ -50,6 +50,7 @@ h1 span{
 
 h2 {
   font-size: 2.5em;
+  font-weight: normal;
   margin-top: 0;
   margin-bottom: 0;
   width: 100%;
@@ -232,7 +233,9 @@ input, textarea, select {
   justify-content: space-between;
 }
 
-.title-div, .artist-div, .user-input{
+.title-div, 
+.artist-div, 
+.user-input{
   width: 49%;
 }
 
@@ -261,7 +264,6 @@ fieldset {
   text-align: left;
   border-radius: 10px
 }
-
 
 .user-search-div, 
 .search-p,  
@@ -305,6 +307,18 @@ span {
   fieldset {
     padding: 3em 3em 4em;
   }
+
+  .title-artist-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .artist-div, 
+  .title-div {
+    width: 100%;
+  }
+
 }
 
 
@@ -318,14 +332,36 @@ span {
   .read-lyrics {
     width: 90%;
   }
+
+  .user-input {
+    width: 60%;
+  }
 }
 
 
 /* ===== MEDIA 600 PX =========================== */
-@media (max-width: 600px){
+@media (max-width: 650px){
 
   body {
     background-repeat: repeat-y;
+  }
+
+  main{
+    width: 90%;
+  }
+
+  .view {
+    padding: .2em;
+  }
+
+  fieldset {
+    width: 100%;
+    border: none;
+    padding: 1em 10px;
+  }
+
+  .user-input {
+    width: 100%;
   }
 
   #read {
@@ -359,9 +395,7 @@ span {
     background-color: rgba(255, 193, 7, 0.7);
   } */
 
-  main{
-    width: 90%;
-  }
+ 
 }
 
 
@@ -381,13 +415,15 @@ span {
   }
 
   h1 span{
-    font-size: 32px;
+    /* font-size: 32px; */
     font-weight: normal;
+    text-shadow: none;
   } 
 
   h2{
-    font-size: 2em;
+    /* font-size: 2em; */
     font-weight: normal;
+    text-shadow: none;
   }
 
 
