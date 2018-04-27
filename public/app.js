@@ -70,7 +70,7 @@ function generateReadPageHTML() {
   console.log('store.currentSong:', STORE.currentSong);
   return `
   <div id="read" class="view">
-    <h3>Title: ${song.title}</h3>
+    <h3>${song.title}</h3>
     <p>Artist: ${song.artist}</p>
     <p class='read-lyrics'>
       ${song.lyrics}
@@ -125,7 +125,7 @@ function generateSearchPageHTML(){
           </br>
 
           <label for='search-submit' class='search-button'>Search Now!</label>
-            <button class='search-button, js-search-button' id='search-submit'>
+            <button class='js-search-button' id='search-submit'>
             </button>
           </label>
         </fieldset>
@@ -151,7 +151,7 @@ function generateSearchResultsHTML() {
 
 function generateListPageHTML() {
   return `
-    <h2>Cellar's Complete Inventory!</h2>
+    <h2 class='stock'>The Cellar's Complete Inventory!</h2>
     <ul class='songs-list'>
       ${renderList().join('')}
     </ul>
@@ -244,7 +244,7 @@ function renderSearchPage(){
   console.log('renderSearchPage ran');
   $('main').html(generateSearchPageHTML());
   if(STORE.message){
-    $('main').append(`<h2>${STORE.message}</h2>`);
+    $('main').append(`<h4>${STORE.message}</h4>`);
   }
 }
 
@@ -257,8 +257,11 @@ function renderList() {
   return STORE.list.map(song => {
     console.log('song in render list:', song);
     return `
-    <li id="${song.id}">
-      <a href="#" class="song">${song.title}</a> <span>By:${song.artist}</span>
+    <li id="${song.id}" class='song-li'>
+      <a href="#" class="song">
+        <h4 class='song-title'>${song.title}</h4>
+      </a> 
+      <p class='song-artist'>Artist: ${song.artist}</p>
     </li>
     `;
   });
