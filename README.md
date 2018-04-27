@@ -37,12 +37,19 @@ For data persistence, we used MongoDB along with Mongoose.
 
 mLab is hosting our database on the web while Heroku hosts the Song Cellar itself. We used TravisCI for continuous integration and testing. 
 
-You can visit the Song Cellar at:
-https://song-cellar.herokuapp.com/
+## Project Links
+
+You can visit the Song Cellar at:      
+https://song-cellar.herokuapp.com/   
 
 
+This version of Song Cellar has been updated from the original:   
 
-https://david-scott-node-capstone.herokuapp.com/
+Live app:   
+https://david-scott-node-capstone.herokuapp.com/   
+
+Github://    
+https://github.com/thinkful-ei17/david-scott-node-capstone
 
 
 
