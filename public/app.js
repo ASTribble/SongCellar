@@ -138,7 +138,7 @@ function generateSearchResultsHTML() {
 
   return `
     <header>
-      <h2>Select a Vintage!</h2>
+      <h2 class='stock'>Select a Vintage!</h2>
     </header>
 
     <section class='show-results, js-show-results'>
@@ -360,12 +360,14 @@ function searchForSongs(){
 }
 
 function makeSearchResultsList(){
-  //change this back to STORE.songsFromSearch when I figure out that part//
+ 
   const resultList = STORE.songsFromSearch.map(song => {
-    console.log('song in resultsListis:', song);
     return `
-    <li id="${song.id}">
-      <a href="#" class="song">${song.title}</a><span>Written By:${song.artist}</span>
+    <li id="${song.id}" class='song-li'>
+      <a href="#" class="song">
+        <h4 class='song-title'>${song.title}</h4>
+      </a> 
+      <p class='song-artist'>Artist: ${song.artist}</p>
     </li>
     `;
   });
