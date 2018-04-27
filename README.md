@@ -14,12 +14,14 @@ Want to review a song before a night out?
 
 ### Never fear, Song Cellar is here!
 
-![Song Cellar Landing Page](./cellar-shots/Welcome.jpg)
+![Song Cellar Landing Page](./cellar-shots/landing-page.png)
 
 
 ## Song Cellar is an easy place to store and locate song lyrics for pub sings.
 
-![Song Cellar Store-a-Song Page](./cellar-shots/Add.jpg)
+![Song Cellar Store-a-Song Page](./cellar-shots/add-song.png)
+
+![Song Cellar Search Page](./cellar-shots/song-search-mobile.png)
 
 ## Technology Used
 
