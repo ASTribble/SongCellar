@@ -35,9 +35,10 @@ const api = {
       headers: {
         'Accept': 'application/json'
       }
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.json());
   },
+
   searchOneSong: function (id) {
     const url = buildUrl(`/songs/${id}`);
 
@@ -46,9 +47,10 @@ const api = {
       headers: {
         'Accept': 'application/json'
       }
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.json());
   },
+
   searchAllUsers: function (query = {}) {
     const url = buildUrl('/users/', query);
 
@@ -57,9 +59,10 @@ const api = {
       headers: {
         'Accept': 'application/json'
       }
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.json());
   },
+
   details: function (id) {
     const url = buildUrl(`/songs/${id}`);
 
@@ -68,9 +71,10 @@ const api = {
       headers: {
         'Accept': 'application/json'
       }
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.json());
   },
+
   create: function (document) {
     const url = buildUrl('/songs/');
 
@@ -81,9 +85,10 @@ const api = {
         'Accept': 'application/json'
       },
       body: document ? JSON.stringify(document) : null
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.json());
   },  
+
   updateSong: function (document) {
     const url = buildUrl(`/songs/${document.id}`);
     return fetch(url, {
@@ -93,11 +98,13 @@ const api = {
         'Accept': 'application/json'
       },
       body: document ? JSON.stringify(document) : null
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.text());
   },
+
   updateUser: function (document) {
     const url = buildUrl(`/users/${document.id}`);
+    console.log('url:', url);
     return fetch(url, {
       method: 'PUT',
       headers: {
@@ -105,9 +112,10 @@ const api = {
         'Accept': 'application/json'
       },
       body: document ? JSON.stringify(document) : null
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.text());
   },
+
   remove: function (id) {
     const url = buildUrl(`/songs/${id}`);
 
@@ -116,9 +124,10 @@ const api = {
       headers: {
         'Accept': 'application/json'
       }
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.text());
   },
+
   addSongToUser: function(document) {
     const url = buildUrl(`/users/${document.id}`);
     
@@ -129,7 +138,7 @@ const api = {
         'Accept': 'application/json'
       },
       body: document ? JSON.stringify(document) : null
-    }).then(normalizeResponseErrors)
+    }).then(res => normalizeResponseErrors(res))
       .then(res => res.json());
   }
 };

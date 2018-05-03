@@ -241,7 +241,6 @@ function renderReadPage() {
 }
 
 function renderSearchPage(){
-  console.log('renderSearchPage ran');
   $('main').html(generateSearchPageHTML());
   if(STORE.message){
     $('main').append(`<h4>${STORE.message}</h4>`);
@@ -249,13 +248,11 @@ function renderSearchPage(){
 }
 
 function renderSearchResultsPage() {
-  console.log('renderSearchResults ran');
   $('main').html(generateSearchResultsHTML());
 }
 
 function renderList() {
   return STORE.list.map(song => {
-    console.log('song in render list:', song);
     return `
     <li id="${song.id}" class='song-li'>
       <a href="#" class="song">
@@ -275,7 +272,6 @@ function renderEditPage() {
   const el = $('main');
   $('main').html(generateEditPageHTML());
   const song = STORE.currentSong;
-  console.log(song);
   el.find('[name=title]').val(song.title);
   el.find('[name=artist]').val(song.artist);
   el.find('[name=lyrics]').val(song.lyrics);
@@ -312,9 +308,9 @@ function renderPage() {
 // Helper Functions
 
 function searchSongByTitle(title){
-  console.log('store.list[0]:', STORE.list[0]);
+
   const songs = STORE.list.filter(song => song.title.toLowerCase().includes(title));
-  console.log('songs:', songs);
+
   if (songs.length === 1){
     STORE.currentSong = songs[0];
     STORE.message = null;
@@ -332,18 +328,14 @@ function searchSongByTitle(title){
 
 function searchSongByUser(userToSearch){
   const users = STORE.users;
-  console.log('STORE.users:', STORE.users);
   const userMatch = users.find(user => user.username === userToSearch);
-  console.log('user:', userMatch);
   const songs = userMatch.songs;
   STORE.songsFromSearch = songs;
-  console.log('STORE.songsFromSearch:', STORE.songsFromSearch);
 }
 
 function searchForSongs(){
   const title = $('#title-input').val().toLowerCase().trim();
   const user = $('.js-user-search').val();
-  console.log(`title: ${title} user: ${user}`);
 
   if(title){
     STORE.message  = null,
@@ -375,12 +367,10 @@ function makeSearchResultsList(){
 }
 
 function getUsers() {
+
   api.searchAllUsers()
-    .then(response => {
-      //this response isn't returning songs
-      console.log('api.searchAllUsers returned:', response);
+    .then(response => {   
       STORE.users = response.map(res => res);
-      console.log('getAllUsers made store.users:',STORE.users);
     })
     .catch(err => console.error(err));
 }
@@ -388,10 +378,7 @@ function getUsers() {
 function getAllSongs() {
   api.searchAllSongs()
     .then(response => {
-      console.log('api.searchAllSongs returned:', response);
-      // STORE.list = response.map(res => res.body);
       STORE.list = response;
-      console.log('store.list set by getAllSongs:', STORE.list);
     })
     .catch(err => console.error(err));
 }
@@ -408,7 +395,7 @@ function createSong(event) {
   const el = $(event.target);
   const userName = el.find('[name=user-choose]').val();
   const user = STORE.findUserByUsername(userName);
-  console.log(user);
+
   const song = {
     title: el.find('[name=title]').val(),
     lyrics: el.find('[name=lyrics]').val(),
@@ -417,21 +404,21 @@ function createSong(event) {
   };
 
   api.create(song)
-    .then(response => {
-      STORE.insertSong(response);
-      STORE.currentSong = response;
+    .then(song => {
+      STORE.insertSong(song);
       const formatResponse = {
-        id: response.id,
-        title: response.title,
-        artist: response.artist
+        id: song.id,
+        title: song.title,
+        artist: song.artist
       };
       user.songs.push(formatResponse);
-      STORE.findByIdAndUpdateUser(user);
-      return STORE.findByIdUser(user.id);
+      const userUpdate = {
+        id: user.id,
+        songs: user.songs.map(song => song.id)
+      };
+      return api.updateUser(userUpdate);
     })
-    .then(userr => {
-      console.log(userr);
-      api.updateUser(userr);
+    .then(()=> {
       STORE.view = 'read';
       renderPage();
     })
@@ -457,25 +444,17 @@ function deleteSong() {
 function songDetails(event) {
   const el = $(event.target);
   const id = el.closest('li').attr('id');
-  console.log(STORE.currentSong);
   STORE.currentSong = STORE.findById(id);
-  console.log(STORE.currentSong);
   STORE.view = 'read';
   renderPage();
-  // console.log(id);
-  // api.details(id)
-  //   .then(response => {
-  //     STORE.currentSong = response;
-  //     STORE.view = 'read';
-  //     renderPage();
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
 }
 
 function editSong(event) {
   const el = $(event.target);
+
+  const userName = el.find('[name=user-choose]').val();
+  const user = STORE.findUserByUsername(userName);
+  
   const id = STORE.currentSong.id;
   const updatedSong = {
     id: id,
@@ -484,11 +463,33 @@ function editSong(event) {
     artist: el.find('[name=artist]').val(),
     notes: el.find('[name=notes]').val() 
   };
-  api.updateSong(updatedSong)
+  return api.updateSong(updatedSong)
     .then(() => {
-      STORE.findByIdAndUpdate(updatedSong);
-      STORE.view = 'read';
-      renderPage();
+      const hasSong = user.songs.filter(song => song.id === updatedSong.id);
+      
+      if(hasSong.length === 0){
+        const formatResponse = {
+          id: updatedSong.id,
+          title: updatedSong.title,
+          artist: updatedSong.artist
+        };
+        user.songs.push(formatResponse);
+        const userUpdate = {
+          id: user.id,
+          songs: user.songs.map(song => song.id)
+        };
+        return api.updateUser(userUpdate)
+          .then(() => {
+            STORE.findByIdAndUpdate(updatedSong);
+            STORE.view = 'read';
+            renderPage();
+          });
+      }
+      else {
+        STORE.findByIdAndUpdate(updatedSong);
+        STORE.view = 'read';
+        renderPage();
+      }
     })
     .catch(err => {
       console.error(err);
@@ -530,14 +531,12 @@ $(() => {
 
   $('main').on('click', '#home-submit-search', event => {
     event.preventDefault();
-    console.log('#home-submit-search was clicked');
     STORE.view = 'search';
     renderPage();
   });
 
   $('main').on('click', '#home-submit-add', event => {
     event.preventDefault();
-    console.log('#home-submit-add was clicked');
     STORE.view = 'add';
     renderPage();
   });
@@ -550,7 +549,6 @@ $(() => {
 
   $('main').on('submit', '#add-form', event => {
     event.preventDefault();
-    console.log('#add-form was submittted');
     createSong(event);
   });
 

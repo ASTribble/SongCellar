@@ -79,6 +79,7 @@ router.post('/', (req, res) => {
     .catch(err=>console.error(err));
 });   
 
+
 router.put('/:id', (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
@@ -94,7 +95,7 @@ router.put('/:id', (req, res) => {
   });
 
   User
-    .findByIdAndUpdate(req.params.id, {$set: fieldsToUpdate}, {new: true})
+    .findByIdAndUpdate(req.params.id, {$set: fieldsToUpdate}, {new: true, upsert: true})
     .then(results => {
       res.status(205).json(results);
     })
