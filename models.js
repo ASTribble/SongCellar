@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-// const {DATABASE_URL} = require('./config');
+
 
 const SongSchema = mongoose.Schema({
   title: {type: String, required: true},
@@ -40,7 +40,7 @@ UserSchema.methods.serialize = function () {
     name: this.name,
     songs: this.songs.map(song => {
       return {
-        id: song._id,//just changed this from song_id... may have broken things
+        id: song._id,
         title: song.title,
         artist: song.artist
       };
