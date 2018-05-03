@@ -274,7 +274,6 @@ function renderEditPage() {
   const el = $('main');
   $('main').html(generateEditPageHTML());
   const song = STORE.currentSong;
-  console.log(song);
   el.find('[name=title]').val(song.title);
   el.find('[name=artist]').val(song.artist);
   el.find('[name=lyrics]').val(song.lyrics);
@@ -464,6 +463,10 @@ function songDetails(event) {
 
 function editSong(event) {
   const el = $(event.target);
+
+  const userName = el.find('[name=user-choose]').val();
+  const user = STORE.findUserByUsername(userName);
+  
   const id = STORE.currentSong.id;
   const updatedSong = {
     id: id,
@@ -472,11 +475,33 @@ function editSong(event) {
     artist: el.find('[name=artist]').val(),
     notes: el.find('[name=notes]').val() 
   };
-  api.updateSong(updatedSong)
+  return api.updateSong(updatedSong)
     .then(() => {
-      STORE.findByIdAndUpdate(updatedSong);
-      STORE.view = 'read';
-      renderPage();
+      const hasSong = user.songs.filter(song => song.id === updatedSong.id);
+      console.log('has song:', hasSong);
+      if(hasSong.length === 0){
+        const formatResponse = {
+          id: updatedSong.id,
+          title: updatedSong.title,
+          artist: updatedSong.artist
+        };
+        user.songs.push(formatResponse);
+        const userUpdate = {
+          id: user.id,
+          songs: user.songs.map(song => song.id)
+        };
+        return api.updateUser(userUpdate)
+          .then(() => {
+            STORE.findByIdAndUpdate(updatedSong);
+            STORE.view = 'read';
+            renderPage();
+          });
+      }
+      else {
+        STORE.findByIdAndUpdate(updatedSong);
+        STORE.view = 'read';
+        renderPage();
+      }
     })
     .catch(err => {
       console.error(err);
