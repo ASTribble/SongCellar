@@ -255,7 +255,6 @@ function renderSearchResultsPage() {
 
 function renderList() {
   return STORE.list.map(song => {
-    console.log('song in render list:', song);
     return `
     <li id="${song.id}" class='song-li'>
       <a href="#" class="song">
@@ -426,13 +425,15 @@ function createSong(event) {
         artist: song.artist
       };
       user.songs.push(formatResponse);
-      return api.updateUser(user);
+      const userUpdate = {
+        id: user.id,
+        songs: user.songs.map(song => song.id)
+      };
+      return api.updateUser(userUpdate);
     })
-    .then(user => {
-      console.log('user after update:',user);
-      // api.updateUser(userr);
-      // STORE.view = 'read';
-      // renderPage();
+    .then(()=> {
+      STORE.view = 'read';
+      renderPage();
     })
     .catch(err => {
       console.error(err);

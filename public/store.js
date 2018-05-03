@@ -12,9 +12,9 @@ class Store {
     this.message = null;
   }
 
-  insertSong(doc){
-    this.currentSong = doc;
-    this.list.push(doc);
+  insertSong(song){
+    this.currentSong = song;
+    this.list.push(song);
   }
 
   findById(id) {
