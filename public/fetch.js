@@ -104,6 +104,7 @@ const api = {
 
   updateUser: function (document) {
     const url = buildUrl(`/users/${document.id}`);
+    console.log('url:', url);
     return fetch(url, {
       method: 'PUT',
       headers: {
@@ -126,7 +127,7 @@ const api = {
     }).then(res => normalizeResponseErrors(res))
       .then(res => res.text());
   },
-  
+
   addSongToUser: function(document) {
     const url = buildUrl(`/users/${document.id}`);
     

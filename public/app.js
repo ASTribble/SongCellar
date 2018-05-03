@@ -417,23 +417,22 @@ function createSong(event) {
   };
 
   api.create(song)
-    .then(response => {
-      STORE.insertSong(response);
-      STORE.currentSong = response;
+    .then(song => {
+      STORE.insertSong(song);
+      // STORE.currentSong = song;
       const formatResponse = {
-        id: response.id,
-        title: response.title,
-        artist: response.artist
+        id: song.id,
+        title: song.title,
+        artist: song.artist
       };
       user.songs.push(formatResponse);
-      STORE.findByIdAndUpdateUser(user);
-      return STORE.findByIdUser(user.id);
+      return api.updateUser(user);
     })
-    .then(userr => {
-      console.log(userr);
-      api.updateUser(userr);
-      STORE.view = 'read';
-      renderPage();
+    .then(user => {
+      console.log('user after update:',user);
+      // api.updateUser(userr);
+      // STORE.view = 'read';
+      // renderPage();
     })
     .catch(err => {
       console.error(err);
@@ -457,21 +456,9 @@ function deleteSong() {
 function songDetails(event) {
   const el = $(event.target);
   const id = el.closest('li').attr('id');
-  console.log(STORE.currentSong);
   STORE.currentSong = STORE.findById(id);
-  console.log(STORE.currentSong);
   STORE.view = 'read';
   renderPage();
-  // console.log(id);
-  // api.details(id)
-  //   .then(response => {
-  //     STORE.currentSong = response;
-  //     STORE.view = 'read';
-  //     renderPage();
-  //   })
-  //   .catch(err => {
-  //     console.error(err);
-  //   });
 }
 
 function editSong(event) {
