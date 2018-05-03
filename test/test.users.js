@@ -60,10 +60,6 @@ describe('Users endpoints tests', function() {
       });
   });
 
-  // afterEach(function () {
-  //   return tearDownDb();
-  // });
-
   after(function () {
     return closeServer();
   });
@@ -93,7 +89,6 @@ describe('Users endpoints tests', function() {
       return chai.request(app)
         .get('/users')
         .then(res => {
-          // console.log('correct fields initial response:',  res);
           res.should.be.status(200);
           res.body.forEach(user => {
             user.should.be.a('object');
@@ -109,7 +104,6 @@ describe('Users endpoints tests', function() {
         .get('/users')
         .then(res => {
           user = res.body[0];
-          // console.log('user:', user);
           return chai.request(app)
             .get(`/users/${user.id}`);
         })
@@ -122,7 +116,7 @@ describe('Users endpoints tests', function() {
         })
         .catch(err => console.log(err));    
     });
-  }); //ends get endpoint describe block  
+  });  
   
   
   describe('POST endpoint', function () {
@@ -133,7 +127,6 @@ describe('Users endpoints tests', function() {
       return chai.request(app)
         .get('/songs')
         .then(res =>{
-          // console.log(res.body);
           songs = res.body;
           return songs;
         })
@@ -144,13 +137,11 @@ describe('Users endpoints tests', function() {
             lastName: 'Newman',
             songs: [{_id: songs[0].id}, {_id: songs[1].id}]
           };
-          console.log('newUser:', newUser);
           return chai.request(app)
             .post('/users')
             .send(newUser)
             .then(res => {
-              // console.log('stringified:', JSON.stringify(res, null, 4));
-              // console.log('last res is:',JSON.stringify(res.body, null, 4));
+
               res.should.be.json;
               res.body.should.be.a('object');
               res.body.should.include.keys('id', 'username', 'name', 'songs');
@@ -159,7 +150,7 @@ describe('Users endpoints tests', function() {
               res.body.id.should.not.be.null;
               res.should.have.status(201);
               res.body.name.should.equal(`${newUser.firstName} ${newUser.lastName}`);
-              // console.log('res.body.songs:', res.body.songs);
+          
               res.body.songs.should.be.a('array');
               res.body.songs[0].should.be.a('object');
               res.body.songs[0].id.should.equal(newUser.songs[0]._id);
@@ -171,6 +162,7 @@ describe('Users endpoints tests', function() {
   describe('PUT endpoint', function () {
   
     it('should update fields you send over', function () {
+      
       let resUser;
 
       const updateData = {
@@ -181,7 +173,6 @@ describe('Users endpoints tests', function() {
       return User
         .findOne()
         .then(res => {
-          // console.log('res:', res);
           updateData.id = res._id;
   
           return chai.request(app)
@@ -191,7 +182,6 @@ describe('Users endpoints tests', function() {
         .then(res => {
           res.should.have.status(205);
           resUser = res.body;
-          // console.log('res.body:', res.body);
           return User.findById(updateData.id);
         })
         .then(res => {

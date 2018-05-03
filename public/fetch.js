@@ -104,7 +104,6 @@ const api = {
 
   updateUser: function (document) {
     const url = buildUrl(`/users/${document.id}`);
-    console.log('url:', url);
     return fetch(url, {
       method: 'PUT',
       headers: {

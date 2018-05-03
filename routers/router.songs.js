@@ -30,7 +30,6 @@ router.get('/:id', (req, res) => {
   Song
     .findById(req.params.id)
     .then(result => {
-      console.log(result);
       res.json(result.serialize());
     })
     .catch(err => {
@@ -48,7 +47,7 @@ router.post('/', (req, res) => {
       return res.status(400).send(message);
     }
   }
-  // what if other fields are in body?
+
   Song
     .create({
       title: req.body.title,
